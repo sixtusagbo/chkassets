@@ -2,27 +2,16 @@
 # Check for unused assets in flutter
 # And automate the removal of them optionally
 
-if [[ -z "$1" ]];
-then
-	echo "Usage: $(basename "$0") flutter_asset_path"
-	exit 98
-fi
-
-assets="$1"
+assets="assets/"
 YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-if [[ $(dirname "assets/") == "." ]];
-then
-	assets=$(pwd)
-fi
-
 while IFS= read -r -d '' file
 do
 	asset="$(basename "$file")"
-	if [ -n "$(find "$(dirname "$assets")" -name "*.dart" -type f -print0 | xargs -0 grep -l -m 1\
+	if [ -n "$(find . -name "*.dart" -type f -print0 | xargs -0 grep -l -m 1\
 		"$asset")" ];
 	then
 		echo -n ""
