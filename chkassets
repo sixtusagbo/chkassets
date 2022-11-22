@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Check for unused assets in flutter
+# And automate the removal of them optionally
+
+assets="assets/"
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+while IFS= read -r -d '' file
+do
+	asset="$(basename "$file")"
+	if [ -n "$(find . -name "*.dart" -type f -print0 | xargs -0 grep -l -m 1\
+		"$asset")" ];
+	then
+		echo -n ""
+		#echo "Path is $file"
+		echo -e "${GREEN}[$file]: ${YELLOW}$asset${NC} is being used"
+	else
+		echo -e "${RED}[$file]: ${NC}Deleting unused asset ${YELLOW}$asset"
+		rm -rf "$file"
+	fi
+done < <(find $assets -type f -print0)
