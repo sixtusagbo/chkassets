@@ -3,7 +3,7 @@ This program is used to automate the removal of unused flutter assets.
 
 ![Screenshot](https://raw.githubusercontent.com/sixtusagbo/chkassets/main/screenshot.png)
 
-**Note:** Run the program for the root of your flutter project. It attempts to
+**Note:** Run the program from the root of your flutter project. It attempts to
 find `assets/` folder. Improvements could be made with time.
 
 ## Installation
